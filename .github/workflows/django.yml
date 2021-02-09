@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         pip install -r requirements.txt
     - name: makemigrations
       run: |
-        python manage.py makemigrations products orders
+        python manage.py makemigrations shops products orders
     - name: migrate
       run: |
         python manage.py migrate  --noinput
