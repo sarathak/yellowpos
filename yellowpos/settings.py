@@ -24,6 +24,8 @@ sys.path.insert(0, PRJ_ROOT)
 SECRET_KEY = 'gvi9j*ztw^o^(d2$5tiyz3p#b3y0fh09yt&@iz#+0f*r3k1hs*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+AUTH_USER_MODEL = 'users.User'
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'shops',
     'products',
     'orders',
