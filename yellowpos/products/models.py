@@ -5,7 +5,7 @@ from shops.models import Shop
 
 
 class Category(models.Model):
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='categories')
+    # shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='categories')
     name = models.CharField(max_length=50, verbose_name=_('Name'))
     tax = models.FloatField(verbose_name=_('Tax'), default=0)
     tax_included = models.BooleanField(verbose_name=_('Tax included'), default=True)
