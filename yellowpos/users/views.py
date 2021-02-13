@@ -1,6 +1,7 @@
 import re
 from datetime import datetime
 
+from django.db import transaction
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
@@ -60,3 +61,29 @@ def login(request):
             "errors": serializer.errors,
         }
         return Response(data, status=400)
+
+
+
+@csrf_exempt
+@api_view(["POST"])
+def register(request):
+    serializer = RegisterSerializer(data=request.data)
+    users = User.objects.filter()
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        username = serializer.validated_data['username']
+        if users.filter(email=email).exists():
+            return Response({'message': _('Email id already exist')},status=status.HTTP_400_BAD_REQUEST)
+        if users.filter(username=username).exists():
+            return Response({'message': _('Username is already exist')},status=status.HTTP_400_BAD_REQUEST)
+        with transaction.atomic():
+            user = serializer.create(serializer.validated_data)
+        token = Token.objects.create(user=user)
+        return Response({'token': token.key})
+    else:
+        data = {
+            "error": True,
+            "errors": serializer.errors,
+        }
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
+

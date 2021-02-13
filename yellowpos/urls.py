@@ -19,5 +19,5 @@ from users import urls as users_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'^api/users/', include((users_urls, 'users'), namespace='users')),
+    path('api/users/', include((users_urls, 'users'), namespace='users')),
 ]
