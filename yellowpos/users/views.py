@@ -18,7 +18,7 @@ def login(request):
     serializer = LoginSerializer(data=request.data)
 
     if serializer.is_valid():
-        users = User.objects.filter(is_active=False, is_staff=True)
+        users = User.objects.filter()
         password = serializer.validated_data['password']
         username = serializer.validated_data['username']
 
@@ -53,7 +53,7 @@ def login(request):
         user.last_login = datetime.now()
         user.save()
         token = Token.objects.create(user=user)
-        response = Response({'user': user.to_json(), 'token': token.key})
+        response = Response({ 'token': token.key})
         return response
     else:
         data = {

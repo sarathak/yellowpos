@@ -1,0 +1,21 @@
+[run]
+branch = False
+source =
+    cms
+    menus
+omit =
+    */migrations/*
+    */commands/*
+    */tests/*
+    docs/*
+    env/*
+    env*
+    wsgi.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
